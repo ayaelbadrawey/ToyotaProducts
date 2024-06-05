@@ -1,6 +1,18 @@
 <template>
-    <div class="mx-10 mb-20">
-        <div class="flex md:flex-row flex-col justify-between my-5">
+    <div>
+        <div class="bg-gray-200	">
+            <div class="flex justify-end gap-20 py-2 mx-10 items-center">
+                <span class="">
+                    <Icon name="eva:pin-outline" class="mx-2 font-normal" color="#b91c1c"></Icon>Locations
+                </span>
+                <span class="">
+                    <Icon name="eva:email-outline" class="mx-2 font-normal" color="#b91c1c"></Icon>Contact Us
+                </span>
+                <span class="">عربي</span>
+
+            </div>
+        </div>
+        <div class="mx-10 flex md:flex-row flex-col justify-between my-5 pb-10 border-b-2 border-gray-100">
             <div class="flex flex-col w-fit">
                 <nuxt-link to="/" class="border-b-2 border-gray-200 font-bold text-rose-700
                     text-lg">TOYOTA</nuxt-link>
@@ -22,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="mt-20">
         <slot></slot>
     </div>
 </template>
