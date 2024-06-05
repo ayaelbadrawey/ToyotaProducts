@@ -19,10 +19,10 @@
                 <span class="text-gray-600 pt-2 md:block hidden">TOYOTA MATERIAL HANDLING INTERNATIONAL</span>
             </div>
             <div class="flex md:flex-row flex-col justify-between items-center gap-10 font-semibold">
-                <nuxt-link class="transition ease-out hover:scale-110 hover:text-red-700"
-                    to="/products">PRODUCTS</nuxt-link>
                 <nuxt-link class="cursor-pointer transition ease-out hover:scale-110 hover:text-red-700"
-                    to="">SERVICES</nuxt-link>
+                    to="">PRODUCTS</nuxt-link>
+                <nuxt-link class="transition ease-out hover:scale-110 hover:text-red-700"
+                    to="/services">SERVICES</nuxt-link>
                 <nuxt-link class="cursor-pointer transition ease-out hover:scale-110 hover:text-red-700"
                     to="">TRAINING</nuxt-link>
                 <nuxt-link class="cursor-pointer transition ease-out hover:scale-110 hover:text-red-700" to="">ABOUT
