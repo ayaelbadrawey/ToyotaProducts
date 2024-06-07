@@ -2,13 +2,13 @@
     <div>
         <div class="bg-gray-200	">
             <div class="flex justify-end gap-20 py-2 mx-10 items-center">
-                <span class="">
+                <span class="cursor-pointer">
                     <Icon name="eva:pin-outline" class="mx-2 font-normal" color="#b91c1c"></Icon>Locations
                 </span>
-                <span class="">
+                <span class="cursor-pointer">
                     <Icon name="eva:email-outline" class="mx-2 font-normal" color="#b91c1c"></Icon>Contact Us
                 </span>
-                <span class="">عربي</span>
+                <span class="cursor-pointer">عربي</span>
 
             </div>
         </div>
