@@ -7,28 +7,24 @@
             <SelectFilter v-for="(filter, index) in filters.data['Select-Type']" :key="index" :filter="filter"
                 @select="handleSelect">
             </SelectFilter>
+            <SliderFilter v-for="(filter, index) in filters.data['Numeric-Type']" :key="index" :filter="filter">
+            </SliderFilter>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 my-10 gap-10">
-            <ProductCard v-for="(product, index) in products.data" :key="index" :product="product">
+            <ProductCard v-for="(product, index) in filteredProducts" :key="index" :product="product">
             </ProductCard>
         </div>
     </div>
 </template>
 <script setup>
 
-const { data: filters } = useFetch('https://api-forklift.code95.info/v1/products/filters');
-var { data: products } = useFetch('https://api-forklift.code95.info/v1/products/getJson');
+const { data: filters } = await useFetch('https://api-forklift.code95.info/v1/products/filters');
+const { data: products } = await useFetch('https://api-forklift.code95.info/v1/products/getJson');
 
-var filtered = reactive({ products })
-
+const filteredProducts = ref(products._rawValue.data);
 function handleSelect(data) {
-    var matched = false;
-    filterProducts(data)
-}
-function filterProducts(data) {
-    filtered = [];
-    products._rawValue.data.forEach((product) => {
-        checkProduct(product.selectTypes, data) ? filtered.push(product) : ''
+    filteredProducts.value = products._rawValue.data.filter((product) => {
+        if (checkProduct(product.selectTypes, data)) { return product }
     })
 }
 function checkProduct(productFeatures, filters) {
