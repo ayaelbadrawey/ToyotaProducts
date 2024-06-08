@@ -32,7 +32,6 @@ const { data: products } = await useFetch('https://api-forklift.code95.info/v1/p
 const filteredProducts = ref(products._rawValue.data);
 const SearchItems = ref([]);
 
-
 function handleSlide(data) {
     const index = SearchItems.value.findIndex(obj => obj.name === data.name);
     if (index !== -1) {
@@ -64,7 +63,6 @@ function filterProducts() {
     })
 }
 function checkProduct(productSelectFeatures, productSlideFeatures, filters) {
-    // console.log('filters: ' + JSON.stringify(filters))
     var selectCounterMatch = 0;
     var silderCounterMatch = 0;
     if (filters.length > 0) {

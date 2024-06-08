@@ -13,7 +13,7 @@
                     @change="slideChanged({ name: props.filter.name, item: value })">
             </div>
             <!-- <span class="text-center"> {{ value }}</span> -->
-            <span class="bg-gray-100 rounded-md p-3 border border-gray-700">{{ props.filter.from }}Kg</span>
+            <span class="bg-gray-100 rounded-md p-3 border border-gray-700">{{ props.filter.to }}Kg</span>
         </div>
     </div>
 </template>
