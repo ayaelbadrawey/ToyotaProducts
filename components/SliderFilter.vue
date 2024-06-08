@@ -3,7 +3,8 @@
 
         <label for="default-range" class="block mb-4 font-semibold text-lg">{{ props.filter.name }}</label>
         <input v-model="value" id="default-range" type="range" value="50" :min="props.filter.from"
-            :max="props.filter.to" class="w-full h-4 bg-red-700 rounded-lg appearance-none cursor-pointer mb-4">
+            :max="props.filter.to" class="w-full h-4 bg-red-700 rounded-lg appearance-none cursor-pointer mb-4"
+            @change="slideChanged({ name: props.filter.name, item: value })">
         <div class="grid grid-cols-3 gap-4 items-baseline">
             <span class="bg-gray-100 rounded-md p-3 border border-gray-700">{{ props.filter.from }}Kg</span>
             <span class="text-center">{{ value }}Kg</span>
@@ -15,12 +16,11 @@
 <script setup>
 const props = defineProps(['filter'])
 const value = ref(0);
+const emit = defineEmits(["slide"])
 
-// const emit = defineEmits(["select"])
-
-// function selectClicked(data) {
-//     emit("select", data)
-// }
+function slideChanged(data) {
+    emit("slide", data)
+}
 
 </script>
 
