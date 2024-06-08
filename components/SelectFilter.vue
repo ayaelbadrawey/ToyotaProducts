@@ -27,7 +27,6 @@ function selectClicked(data) {
     emit("select", data)
 }
 function handleButtonClick(index) {
-    console.log('index: ', index)
     activeIndex.value = index;
 }
 </script>

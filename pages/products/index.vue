@@ -22,6 +22,9 @@
     </div>
 </template>
 <script setup>
+useHead({
+    title: 'TOYOTA | Products'
+})
 
 const { data: filters } = await useFetch('https://api-forklift.code95.info/v1/products/filters');
 const { data: products } = await useFetch('https://api-forklift.code95.info/v1/products/getJson');
@@ -31,38 +34,51 @@ const SearchItems = ref([]);
 
 
 function handleSlide(data) {
-    SearchItems.value.push(data);
+    const index = SearchItems.value.findIndex(obj => obj.name === data.name);
+    if (index !== -1) {
+        SearchItems.value[index].item = data.item;
+    } else {
+        data['type'] = 'slider';
+        SearchItems.value.push(data)
+    }
+    filterProducts();
 }
 
 function handleSelect(data) {
     if (SearchItems.value.length < 1) {
+        data['type'] = 'select'
         SearchItems.value.push(data)
     }
     const index = SearchItems.value.findIndex(obj => obj.name === data.name);
     if (index !== -1) {
         SearchItems.value[index].item = data.item;
     } else {
+        data['type'] = 'select';
         SearchItems.value.push(data)
     }
-    console.log('data: ' + JSON.stringify(SearchItems.value))
     filterProducts();
 }
 function filterProducts() {
     filteredProducts.value = products._rawValue.data.filter((product) => {
-        if (checkProduct(product.selectTypes, SearchItems.value)) { return product }
+        if (checkProduct(product.selectTypes, product.numericTypes, SearchItems.value)) { return product }
     })
 }
-function checkProduct(productFeatures, filters) {
-    var matched = false;
+function checkProduct(productSelectFeatures, productSlideFeatures, filters) {
+    // console.log('filters: ' + JSON.stringify(filters))
+    var selectCounterMatch = 0;
+    var silderCounterMatch = 0;
     if (filters.length > 0) {
-        productFeatures.forEach((feature) => {
-            if (SearchItems.value.findIndex(obj => obj.name === feature.name && obj.item === feature.values.name) != -1) {
-                matched = true;
-            } else {
-                return false
+        productSelectFeatures.forEach((feature) => {
+            if (SearchItems.value.findIndex(obj => obj.name === feature.name && obj.item === feature.values.name && obj.type == 'select') != -1) {
+                selectCounterMatch += 1;
             }
         })
-        return matched ? true : false
+        productSlideFeatures.forEach((feature) => {
+            if (SearchItems.value.findIndex(obj => obj.name === feature.name && obj.item == feature.value && obj.type == 'slider') != -1) {
+                silderCounterMatch += 1;
+            }
+        })
+        return (selectCounterMatch + silderCounterMatch == filters.length) ? true : false
     } else {
         return true
     }
