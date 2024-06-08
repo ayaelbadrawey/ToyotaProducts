@@ -5,7 +5,7 @@
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-4 gap-10 mt-10">
             <SelectFilter v-for="(filter, index) in filters.data['Select-Type']" :key="index" :filter="filter"
-                @select="handleSelect">
+                @select="handleSelect" :isRemoved="isRemoved">
             </SelectFilter>
             <SliderFilter v-for="(filter, index) in filters.data['Numeric-Type']" :key="index" :filter="filter"
                 @slide="handleSlide">
@@ -31,6 +31,9 @@ const { data: products } = await useFetch('https://api-forklift.code95.info/v1/p
 
 const filteredProducts = ref(products._rawValue.data);
 const SearchItems = ref([]);
+
+const isRemoved = ref([])
+
 
 function handleSlide(data) {
     const index = SearchItems.value.findIndex(obj => obj.name === data.name);
@@ -86,6 +89,7 @@ function handleRemove(data) {
     SearchItems.value = SearchItems.value.filter(obj => {
         return obj.name !== data.name || obj.item !== data.item;
     });
+    isRemoved.value.push(data.index);
     filterProducts();
 }
 
